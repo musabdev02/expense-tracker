@@ -95,29 +95,39 @@ const Home = () => {
   };
   const abortTransRq = () => {setNewTrans(false)}
   const saveTranscation = () => {
-    if(transName !== "" && transAmount > 0){
-      const savedTranscations = JSON.parse(localStorage.getItem("transcations")) || [];
-      if(!savedTranscations){
-        localStorage.setItem("transcations", JSON.stringify([]))
-      }
-      const newOne = {
-        title: transName,
-        amount: Number(transAmount),
-        description: transDesc
+    if(balance > 1){
+      if(transName !== "" && transAmount > 0){
+        const savedTranscations = JSON.parse(localStorage.getItem("transcations")) || [];
+        if(!savedTranscations){
+          localStorage.setItem("transcations", JSON.stringify([]))
+        }
+        const newOne = {
+          title: transName,
+          amount: Number(transAmount),
+          description: transDesc
+        };
+        savedTranscations.push(newOne);
+        localStorage.setItem("transcations", JSON.stringify(savedTranscations));
+        setTranscations(savedTranscations)
+        resetProps();
+        setAlertContent({
+          title: "Created New Transaction",
+          color: "green",
+          isVisible: true
+        });
+        setNewTrans(false);
+        closeAlert();
+        calculateRemain()
       };
-      savedTranscations.push(newOne);
-      localStorage.setItem("transcations", JSON.stringify(savedTranscations));
-      setTranscations(savedTranscations)
-      resetProps();
+    }else{
       setAlertContent({
-        title: "Created New Transaction",
-        color: "green",
+        title: "Please enter the balance first.",
+        color: "red",
         isVisible: true
       });
       setNewTrans(false);
-      closeAlert();
-      calculateRemain()
-    };
+      closeAlert()
+    }
   };
   const resetProps = () =>{
     setTransName("");

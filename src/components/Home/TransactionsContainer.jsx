@@ -3,6 +3,7 @@ import React from 'react'
 import Transaction from './Transaction'
 import Button from '../UI/Button'
 const Transactions = ({ newTransRq }) => {
+  let transcations = JSON.parse(localStorage.getItem("transcations")) || [];
   return (
     <div className='mt-12'>
       <h3 className='text-2xl font-semibold text-zinc-600'>Recent Transactions</h3>
@@ -14,11 +15,16 @@ const Transactions = ({ newTransRq }) => {
         <p>Actions</p>
       </div>
       <div className='removeScroll h-[330px] overflow-y-auto'>
-        <div className='h-full flex items-center justify-center flex-col gap-4'>
-          <h4 className='text-lg text-zinc-600'>There is no transcations yet..</h4>
-         <span onClick={newTransRq}><Button content={"Add Transcation"} /></span> 
-        </div>
-        {/* <Transaction /> */}
+        {
+          transcations.length >= 1 ?
+          transcations.map((item, index) => (
+            <Transaction title={item.title} amount={item.amount} key={index} date={new Date().getDate() + "/" + (new Date().getMonth()+1 ).toLocaleString().padStart(2, 0)} /> 
+          )):
+          <div className='h-full flex items-center justify-center flex-col gap-4'>
+            <h4 className='text-lg text-zinc-600'>There is no transcations yet..</h4>
+           <span onClick={newTransRq}><Button content={"Add Transcation"} /></span> 
+          </div>
+        }
       </div>
     </div>
   )
