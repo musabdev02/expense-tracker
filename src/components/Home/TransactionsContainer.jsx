@@ -1,7 +1,8 @@
 import React from 'react'
 // components
 import Transaction from './Transaction'
-const Transactions = () => {
+import Button from '../UI/Button'
+const Transactions = ({ newTransRq }) => {
   return (
     <div className='mt-12'>
       <h3 className='text-2xl font-semibold text-zinc-600'>Recent Transactions</h3>
@@ -13,7 +14,11 @@ const Transactions = () => {
         <p>Actions</p>
       </div>
       <div className='removeScroll h-[330px] overflow-y-auto'>
-        <Transaction />
+        <div className='h-full flex items-center justify-center flex-col gap-4'>
+          <h4 className='text-lg text-zinc-600'>There is no transcations yet..</h4>
+         <span onClick={newTransRq}><Button content={"Add Transcation"} /></span> 
+        </div>
+        {/* <Transaction /> */}
       </div>
     </div>
   )

@@ -15,6 +15,9 @@ const Home = () => {
   // balance
   const [balance, setBalance] = useState(0);
   const [hasBalance, setHasBalance] = useState(false);
+  const [newBalance, setNewBalance] = useState(false);
+  // expense
+  const [expense, setExpense] = useState(0);
   // transcations
   const [transcations, setTranscations] = useState([]);
   const [transName, setTransName] = useState("");
@@ -36,13 +39,16 @@ const Home = () => {
     }else{
       setIsUserPopup(true)
     }
-    // balance
+    
+  }, []);
+  useEffect(() => {
     const savedBalance = JSON.parse(localStorage.getItem("balance"))
     if(savedBalance){
-      setHasBalance(true)
-      setBalance(savedBalance.balance)
-    }else{setHasBalance(false)}
-  }, []);
+      setHasBalance(true);
+      setBalance(savedBalance.balance);
+      setExpense(savedBalance.expense);
+    }
+  }, [transcations])
 
   // functions
   const saveName = () => {
@@ -62,9 +68,16 @@ const Home = () => {
     if(balance > 1){
       localStorage.setItem("balance", JSON.stringify({
         balance: Number(balance),
-        expense: 0
+        expense: Number(expense)
       }));
-      setHasBalance(true)
+      setNewBalance(false);
+      setHasBalance(true);
+      setAlertContent({
+        title: "New Balance Added!",
+        color: "green",
+        isVisible: true
+      });
+      closeAlert()
     }else{
       setAlertContent({
         title: "Please enter valid balance",
@@ -73,6 +86,9 @@ const Home = () => {
       });
       closeAlert()
     }
+  };
+  const newBalanceRq = () => {
+    setNewBalance(true)
   };
   const newTransRq = () => {
     setNewTrans(true);
@@ -92,7 +108,6 @@ const Home = () => {
       savedTranscations.push(newOne);
       localStorage.setItem("transcations", JSON.stringify(savedTranscations));
       setTranscations(savedTranscations)
-      console.log(transcations)
       resetProps();
       setAlertContent({
         title: "Created New Transaction",
@@ -100,7 +115,8 @@ const Home = () => {
         isVisible: true
       });
       setNewTrans(false);
-      closeAlert()
+      closeAlert();
+      calculateRemain()
     };
   };
   const resetProps = () =>{
@@ -112,7 +128,14 @@ const Home = () => {
     setTimeout(() => {
       setAlertContent({isVisible: false})
     }, 1500);
-  }
+  };
+  const calculateRemain = () => {
+    let oldBalance = JSON.parse(localStorage.getItem("balance"));
+    localStorage.setItem("balance", JSON.stringify({
+      balance: balance - transAmount,
+      expense: oldBalance.expense += Number(transAmount)
+    }));
+  };
     return (
       <>
       {/* name Popup */}
@@ -122,8 +145,8 @@ const Home = () => {
       }
       {/* balance popup */}
       {
-        hasBalance === false ?
-        <SinglePoup title={"Enter your balance to continue"} holder={"Your Balance"} isNumber={true} changeFun={setBalance} changeVal={balance} saveFun={saveBalance} />: ""
+        newBalance &&
+        <SinglePoup title={"Enter Your Balance"} holder={"Your Balance"} isNumber={true} changeFun={setBalance} changeVal={balance} saveFun={saveBalance} />
       }
       {/* transition popup */}
       {
@@ -198,10 +221,10 @@ const Home = () => {
             <Card
               content={"Total Expenses"}
               addClass={"card2"}
-              balance={"0"}
+              balance={expense}
             />
           </div>
-          <TransactionsContainer/>
+          <TransactionsContainer newTransRq={newTransRq}/>
           </div>
           {/* info & news */}
           <div className="w-[30%] py-8 px-14">
@@ -211,7 +234,7 @@ const Home = () => {
               hasBalance === true ? "Nothing here.." : 
               <div className="w-[300px] h-52 bg-yellow-200 rounded-md p-8">
                 <h3 className="font-[500] text-xl text-yellow-900 leading-7">Add a Balance to Get Started Your Finanical Journey.</h3>
-                <p className="mt-8 font-semibold cursor-pointer text-yellow-800 hover:underline">Add Balance</p>
+                <p className="mt-8 font-semibold cursor-pointer text-yellow-800 hover:underline" onClick={newBalanceRq}>Add Balance</p>
               </div>
             }
           </div>
