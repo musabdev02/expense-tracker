@@ -6,6 +6,7 @@ import Button from '../components/UI/Button'
 import Card from '../components/Home/Card'
 import TransactionsContainer from '../components/Home/TransactionsContainer'
 import SinglePoup from '../components/Home/SinglePoup'
+import Alert from '../components/UI/Alert'
 
 const Home = () => {
   // userName
@@ -19,7 +20,13 @@ const Home = () => {
   const [transName, setTransName] = useState("");
   const [transAmount, setTransAmount] = useState(0);
   const [transDesc, setTransDesc] = useState("");
-  const [newTrans, setNewTrans] = useState(false)
+  const [newTrans, setNewTrans] = useState(false);
+  // alert
+  const [alertContent, setAlertContent] = useState({
+    title: "",
+    color: "red",
+    isVisible: false
+  });
   // effects
   useEffect(() => {
     const name = localStorage.getItem("name");
@@ -42,15 +49,29 @@ const Home = () => {
     if(userName !== ""){
       localStorage.setItem("name", userName);
       setIsUserPopup(false)
-    }
+    }else{
+      setAlertContent({
+        title: "Please enter valid name",
+        isVisible: true,
+        color: "red"
+      });
+      closeAlert()
+    };
   };
   const saveBalance = () => {
-    if(balance !== ""){
+    if(balance > 1){
       localStorage.setItem("balance", JSON.stringify({
         balance: Number(balance),
         expense: 0
       }));
       setHasBalance(true)
+    }else{
+      setAlertContent({
+        title: "Please enter valid balance",
+        isVisible: true,
+        color: "red"
+      });
+      closeAlert()
     }
   };
   const newTransRq = () => {
@@ -73,6 +94,13 @@ const Home = () => {
       setTranscations(savedTranscations)
       console.log(transcations)
       resetProps();
+      setAlertContent({
+        title: "Created New Transaction",
+        color: "green",
+        isVisible: true
+      });
+      setNewTrans(false);
+      closeAlert()
     };
   };
   const resetProps = () =>{
@@ -80,6 +108,11 @@ const Home = () => {
     setTransAmount("");
     setTransDesc("");
   };
+  const closeAlert = () => {
+    setTimeout(() => {
+      setAlertContent({isVisible: false})
+    }, 1500);
+  }
     return (
       <>
       {/* name Popup */}
@@ -184,6 +217,8 @@ const Home = () => {
           </div>
           </section>
         </section>
+        
+      <Alert content={alertContent.title} color={alertContent.color} isVisible={alertContent.isVisible}/>
       </>
       );
 }
