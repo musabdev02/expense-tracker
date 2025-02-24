@@ -3,10 +3,16 @@ import React, {useEffect, useState} from 'react'
 import Button from '../components/UI/Button'
 import Card from '../components/Home/Card'
 import TransactionsContainer from '../components/Home/TransactionsContainer'
+import SinglePoup from '../components/Home/SinglePoup'
 
 const Home = () => {
+  // userName
   const [userName, setUserName] = useState("");
-  const [isUserPopup, setIsUserPopup] = useState(false)
+  const [isUserPopup, setIsUserPopup] = useState(false);
+  // balance
+  const [balance, setBalance] = useState(0);
+  const [hasBalance, setHasBalance] = useState(false)
+  // effects
   useEffect(() => {
     const name = localStorage.getItem("name");
     if(name){
@@ -15,39 +21,41 @@ const Home = () => {
     }else{
       setIsUserPopup(true)
     }
+    // balance
+    const savedBalance = JSON.parse(localStorage.getItem("balance"))
+    if(savedBalance){
+      setHasBalance(true)
+      setBalance(savedBalance.balance)
+    }else{setHasBalance(false)}
   }, [])
-  // saveName
+
+  // functions
   const saveName = () => {
     if(userName !== ""){
       localStorage.setItem("name", userName);
-      setUserExist(false)
+      setIsUserPopup(false)
+    }
+  }
+  const saveBalance = () => {
+    if(balance !== ""){
+      localStorage.setItem("balance", JSON.stringify({
+        balance: Number(balance),
+        expense: 0
+      }));
+      setHasBalance(true)
     }
   }
     return (
       <>
       {/* name Popup */}
       {
-        isUserPopup && <div className="w-full h-screen z-9 left-0 top-0 absolute bg-[#020202eb] flex items-center justify-center">
-        <div className="w-[20%] h-[200px] bg-white rounded-lg p-8 text-center">
-          <h3 className=" text-xl text-zinc-600">
-            Enter Your Name to Continue
-          </h3>
-          <input
-            type="text"
-            placeholder="Your Name..."
-            className="capitalize border border-zinc-300 w-full px-4 py-3 rounded-lg outline-none mt-4 focus:border-blue-300"
-            spellCheck={false}
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-          <button
-            className="mt-2 border border-blue-300 px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-100"
-            onClick={saveName}
-          >
-            Get Started
-          </button>
-        </div>
-      </div>
+        isUserPopup && 
+        <SinglePoup title={"Enter your name to continue"} holder={"Your Name"} isNumber={false} changeFun={setUserName} changeVal={userName} saveFun={saveName}/>
+      }
+      {/* balance popup */}
+      {
+        hasBalance === false ?
+        <SinglePoup title={"Enter your balance to continue"} holder={"Your Balance"} isNumber={true} changeFun={setBalance} changeVal={balance} saveFun={saveBalance} />: ""
       }
         
       {/* homePage */}
@@ -72,7 +80,7 @@ const Home = () => {
             <Card
               content={"Total balance"}
               addClass={"card1"}
-              balance={"0"}
+              balance={balance}
             />
             <Card
               content={"Total Expenses"}
