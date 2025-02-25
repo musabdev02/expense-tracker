@@ -28,7 +28,7 @@ const Sidebar = () => {
                 <span><FaRegChartBar size={22} /></span>
                 <p className="text-lg">Statistics</p>
             </Link>
-            <Link to={"/settings"} className="cursor-pointer flex items-center hover:bg-blue-100 gap-4 p-3 rounded-lg">
+            <Link to={"/settings"} className={`cursor-pointer flex items-center hover:bg-blue-100 gap-4 p-3 rounded-lg ${location.pathname === "/settings" ? "bg-blue-300 hover:bg-blue-300" : ""}`}>
                 <span><IoSettingsOutline size={22} /></span>
                 <p className="text-lg">Settings</p>
             </Link>
