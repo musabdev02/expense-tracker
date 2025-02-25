@@ -31,7 +31,7 @@ const Categories = () => {
       const newOne = {
         title: cateName,
         icon: selectedIcon.type.name,
-        date: new Date().getDate() + monthNames[new Date().getMonth()]
+        date: new Date().getDate() + ", " + monthNames[new Date().getMonth()]
       };
   
       savedCategories.push(newOne);
@@ -107,7 +107,9 @@ const Categories = () => {
         <div className="mt-12 flex flex-col gap-4">
           {
             categories.length >= 1 ? 
-            <Category />:
+            categories.reverse().map((item, index) => (
+              <Category title={item.title} icon={item.icon} date={item.date} key={index} />
+            )):
             <h3 className="text-zinc-700">No categries created yet.</h3>
           }
         </div>
