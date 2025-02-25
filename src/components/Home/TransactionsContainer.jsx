@@ -10,11 +10,11 @@ const Transactions = ({ newTransRq }) => {
       <div className='flex justify-between mt-4 text-zinc-600 w-[98%] relative addUnderline pb-3'>
         <p>Transaction name</p>
         <p>Amount</p>
-        <p>Date</p>
+        <p className='hidden sm:block'>Date</p>
         <p className='hidden sm:block'>Time</p>
         <p>Actions</p>
       </div>
-      <div className='hiddenScrollbar h-[250px] sm:h-[330px] sm:overflow-y-auto'>
+      <div className='hiddenScrollbar mb-4 sm:h-[330px] sm:overflow-y-auto'>
         {
           transcations.length >= 1 ?
           transcations.reverse().map((item, index) => (

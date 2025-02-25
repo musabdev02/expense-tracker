@@ -30,7 +30,7 @@ const Categories = () => {
       
       const newOne = {
         title: cateName,
-        icon:  selectedIcon.name,
+        icon:  selectedIcon.type.name,
         date: new Date().getDate() + ", " + monthNames[new Date().getMonth()]
       };
   

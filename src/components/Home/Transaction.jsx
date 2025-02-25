@@ -15,7 +15,7 @@ const Transaction = ({ title, amount, date, time, icon }) => {
         <h4>-${amount}</h4>
       </div>
       {/* date */}
-      <div>
+      <div className='hidden sm:block'>
         <h3>{date}</h3>
       </div>
       {/* time */}

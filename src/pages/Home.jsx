@@ -243,7 +243,7 @@ const Home = () => {
           <section className="flex gap-6 flex-col sm:flex-row">
           {/* cards & transcations */}
           <div className="w-[100%] sm:w-[70%]">
-          <div className="mt-8 flex gap-4 w-full">
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full">
             <Card
               content={"Total balance"}
               addClass={"card1"}
