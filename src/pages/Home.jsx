@@ -99,9 +99,9 @@ const Home = () => {
     if(balance > 1){
       if(transName !== "" && transAmount > 0){
         const savedTranscations = JSON.parse(localStorage.getItem("transcations")) || [];
-        if(!savedTranscations){
-          localStorage.setItem("transcations", JSON.stringify([]))
-        }
+        // if(!savedTranscations){
+        //   localStorage.setItem("transcations", JSON.stringify([]))
+        // }
         let hours = new Date().getHours();
         let period = hours >= 12 ? "PM" : "AM";
         hours = hours % 12 || 12;
@@ -207,7 +207,7 @@ const Home = () => {
               </span>
             </div>
           </div>
-      </div>
+        </div>
       }
       
       {/* homePage */}
