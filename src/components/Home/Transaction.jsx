@@ -3,7 +3,7 @@ import React from 'react'
 import * as Icons from "react-icons/fa";
 import Button from '../UI/Button';
 const Transaction = ({ title, amount, date, time, icon }) => {
-  const IconComponent = Icons[icon]
+  const IconComponent = Icons[icon] || Icons.FaQuestionCircle
   return (
     <div className='mt-6 flex items-center justify-between'>
       <div className='flex items-center gap-2 w-[144px]'>

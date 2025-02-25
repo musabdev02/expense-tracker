@@ -30,7 +30,7 @@ const Categories = () => {
       
       const newOne = {
         title: cateName,
-        icon: selectedIcon.type.name,
+        icon:  selectedIcon.name,
         date: new Date().getDate() + ", " + monthNames[new Date().getMonth()]
       };
   
@@ -72,7 +72,7 @@ const Categories = () => {
                    key={index}
                    onClick={() => setSelectedIcon((prev) => item)}
                    className={`cursor-pointer rounded-md border p-2 text-lg transition ${
-                    selectedIcon?.type === item.type ? "bg-blue-500 text-white" : "border-zinc-200 text-zinc-600 hover:bg-zinc-200"
+                    selectedIcon === item ? "bg-blue-500 text-white" : "border-zinc-200 text-zinc-600 hover:bg-zinc-200"
                   }`}
                 >
                    {item}
