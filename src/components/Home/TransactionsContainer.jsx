@@ -17,8 +17,8 @@ const Transactions = ({ newTransRq }) => {
       <div className='removeScroll h-[330px] overflow-y-auto'>
         {
           transcations.length >= 1 ?
-          transcations.map((item, index) => (
-            <Transaction title={item.title} amount={item.amount} key={index} date={new Date().getDate() + "/" + (new Date().getMonth()+1 ).toLocaleString().padStart(2, 0)} /> 
+          transcations.reverse().map((item, index) => (
+            <Transaction title={item.title} amount={item.amount} key={index} date={item.date} time={item.time} /> 
           )):
           <div className='h-full flex items-center justify-center flex-col gap-4'>
             <h4 className='text-lg text-zinc-600'>There is no transcations yet..</h4>

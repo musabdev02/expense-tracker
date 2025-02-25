@@ -94,6 +94,7 @@ const Home = () => {
     setNewTrans(true);
   };
   const abortTransRq = () => {setNewTrans(false)}
+
   const saveTranscation = () => {
     if(balance > 1){
       if(transName !== "" && transAmount > 0){
@@ -101,10 +102,15 @@ const Home = () => {
         if(!savedTranscations){
           localStorage.setItem("transcations", JSON.stringify([]))
         }
+        let hours = new Date().getHours();
+        let period = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12 || 12;
         const newOne = {
           title: transName,
           amount: Number(transAmount),
-          description: transDesc
+          description: transDesc,
+          date: new Date().getDate() + "/" + (new Date().getMonth()+1 ).toLocaleString().padStart(2, 0),
+          time: hours + ":" + new Date().getMinutes().toLocaleString().padStart(2, 0) + period
         };
         savedTranscations.push(newOne);
         localStorage.setItem("transcations", JSON.stringify(savedTranscations));

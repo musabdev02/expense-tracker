@@ -2,7 +2,7 @@ import React from 'react'
 // ICONS
 import { LuCakeSlice } from "react-icons/lu";
 import Button from '../UI/Button';
-const Transaction = ({ title, amount, date }) => {
+const Transaction = ({ title, amount, date, time }) => {
   return (
     <div className='mt-6 flex items-center justify-between'>
       <div className='flex items-center gap-2 w-[144px]'>
@@ -19,7 +19,7 @@ const Transaction = ({ title, amount, date }) => {
       </div>
       {/* time */}
       <div>
-        <h3>11:30Am</h3>
+        <h3>{time}</h3>
       </div>
       {/* actions */}
       <Button content={"Details"} isIcon={false} />
