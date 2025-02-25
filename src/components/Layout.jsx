@@ -7,7 +7,7 @@ const Layout = () => {
     <section>
     <div className="flex flex-col-reverse h-screen sm:flex-row ">
       <Sidebar />
-      <div className="flex-1 overflow-y-hidden bg-[white] h-full p-16">
+      <div className="flex-1 sm:overflow-y-hidden bg-[white] h-full p-8 sm:p-16">
        <Outlet />
       </div>
     </div>

@@ -9,7 +9,7 @@ const Sidebar = () => {
   let location = useLocation();
 
   return (
-    <section className="w-[16%] h-screen bg-[#f0f7ff]">
+    <section className="hidden sm:block w-[16%] h-screen bg-[#f0f7ff]">
       <div className="py-20">
         <div className="logo px-12 flex items-center gap-2">
           <img src="/logo.png" alt="logo" className="w-10" />

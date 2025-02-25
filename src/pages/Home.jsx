@@ -168,9 +168,9 @@ const Home = () => {
       {/* transition popup */}
       {
         newTrans &&
-        <div className="absolute flex justify-center items-center w-full h-screen bg-zinc-800/50 left-0 top-0 z-9">
-          <div className="w-[30%] relative h-[auto] bg-white  my-4 rounded-lg px-8 py-16">
-            <span
+        <div className="absolute flex justify-center items-center w-full h-[100vh] bg-zinc-800/50 left-0 top-0 z-99">
+          <div className="w-[90%] sm:w-[30%] relative h-[auto] bg-white  my-4 rounded-lg px-8 py-16">
+            <span 
               onClick={abortTransRq}
               className="absolute right-5 top-5 cursor-pointer"
             >
@@ -227,12 +227,12 @@ const Home = () => {
       
       {/* homePage */}
         <section>
-          <div className="flex items-center justify-between">
+          <div className="flex items-start sm:items-center gap-4 sm:gap-0 justify-between flex-col sm:flex-row">
             <div>
-              <h3 className="font-semibold text-4xl text-blue-900">
+              <h3 className="font-semibold text-2xl sm:text-4xl text-blue-900">
                 Hey there, {userName.slice(0, 1).toUpperCase() + userName.slice(1)}
               </h3>
-              <p className="pt-2 text-zinc-700 text-md">
+              <p className="pt-2 text-zinc-700 text-sm sm:text-md">
                 Have a great day! Good luck on your finanical journey.
               </p>
             </div>
@@ -240,9 +240,9 @@ const Home = () => {
               <Button content={"New Transcation"} isIcon={true} />
             </span>
           </div>
-          <section className="flex gap-6">
+          <section className="flex gap-6 flex-col sm:flex-row">
           {/* cards & transcations */}
-          <div className="w-[70%]">
+          <div className="w-[100%] sm:w-[70%]">
           <div className="mt-8 flex gap-4 w-full">
             <Card
               content={"Total balance"}
@@ -258,7 +258,7 @@ const Home = () => {
           <TransactionsContainer newTransRq={newTransRq}/>
           </div>
           {/* info & news */}
-          <div className="w-[30%] py-8 px-14">
+          <div className="w-[100%] sm:w-[30%] py-8 sm:px-14">
             <h4 className="mb-6 text-lg text-zinc-500">News & Information</h4>
             {/* add balance card! */}
             {
