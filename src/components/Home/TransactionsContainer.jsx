@@ -14,11 +14,11 @@ const Transactions = ({ newTransRq }) => {
         <p>Time</p>
         <p>Actions</p>
       </div>
-      <div className='removeScroll h-[330px] overflow-y-auto'>
+      <div className='hiddenScrollbar h-[330px] overflow-y-auto'>
         {
           transcations.length >= 1 ?
           transcations.reverse().map((item, index) => (
-            <Transaction title={item.title} amount={item.amount} key={index} date={item.date} time={item.time} /> 
+            <Transaction title={item.title} amount={item.amount} key={index} date={item.date} time={item.time} icon={item.icon} /> 
           )):
           <div className='h-full flex items-center justify-center flex-col gap-4'>
             <h4 className='text-lg text-zinc-600'>There is no transcations yet..</h4>

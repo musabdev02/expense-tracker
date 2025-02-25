@@ -104,7 +104,7 @@ const Categories = () => {
           </div>
         </div>
         {/* categories */}
-        <div className="mt-12 flex flex-col gap-4">
+        <div className="mt-12 flex flex-col gap-4 h-[70vh] overflow-y-auto hiddenScrollbar">
           {
             categories.length >= 1 ? 
             categories.reverse().map((item, index) => (

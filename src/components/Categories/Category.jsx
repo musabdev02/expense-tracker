@@ -9,7 +9,7 @@ const Category = ({ title, icon, date }) => {
     <div className="flex justify-between hover:bg-blue-100 p-4 rounded-lg">
     <div className="flex items-center gap-4">
       <span className="bg-blue-400 p-2 rounded-md"> <IconComponent size={20}/></span>
-      <h3 className="text-lg">{title}</h3>
+      <h3 className="text-lg capitalize">{title}</h3>
     </div>
     <div className="flex items-center justify-between w-4/12">
         <p className="text-lg text-zinc-700">{date}</p>

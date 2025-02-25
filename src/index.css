@@ -5,3 +5,6 @@
 /* custom */
 .card1{background: linear-gradient(90deg, rgba(58,114,180,1) 0%, rgba(29,135,253,1) 50%);}
 .card2{background: linear-gradient(90deg, rgba(180,74,58,1) 0%, rgba(253,126,29,1) 50%);}
+.hiddenScrollbar::-webkit-scrollbar{
+    display: none;
+}

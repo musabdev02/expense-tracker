@@ -1,12 +1,13 @@
 import React from 'react'
 // ICONS
-import { LuCakeSlice } from "react-icons/lu";
+import * as Icons from "react-icons/fa";
 import Button from '../UI/Button';
-const Transaction = ({ title, amount, date, time }) => {
+const Transaction = ({ title, amount, date, time, icon }) => {
+  const IconComponent = Icons[icon]
   return (
     <div className='mt-6 flex items-center justify-between'>
       <div className='flex items-center gap-2 w-[144px]'>
-        <span className='bg-blue-300 p-2 rounded-md'><LuCakeSlice /></span>
+        <span className='bg-blue-300 p-2 rounded-md'><IconComponent /></span>
         <h3>{title}</h3>
       </div>
       {/* amount */}

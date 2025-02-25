@@ -19,9 +19,11 @@ const Home = () => {
   // expense
   const [expense, setExpense] = useState(0);
   // transcations
+  const categories = JSON.parse(localStorage.getItem("categories")) || [];
   const [transcations, setTranscations] = useState([]);
   const [transName, setTransName] = useState("");
   const [transAmount, setTransAmount] = useState(0);
+  const [selectedCate, setSelectedCate] = useState(categories.length > 0 ? categories[0].title : "")
   const [transDesc, setTransDesc] = useState("");
   const [newTrans, setNewTrans] = useState(false);
   // alert
@@ -99,16 +101,15 @@ const Home = () => {
     if(balance > 1){
       if(transName !== "" && transAmount > 0){
         const savedTranscations = JSON.parse(localStorage.getItem("transcations")) || [];
-        // if(!savedTranscations){
-        //   localStorage.setItem("transcations", JSON.stringify([]))
-        // }
         let hours = new Date().getHours();
         let period = hours >= 12 ? "PM" : "AM";
         hours = hours % 12 || 12;
+        const selectedIcon = categories.find((cat) => cat.title === selectedCate)?.icon || "";
         const newOne = {
           title: transName,
           amount: Number(transAmount),
           description: transDesc,
+          icon: selectedIcon,
           date: new Date().getDate() + "/" + (new Date().getMonth()+1 ).toLocaleString().padStart(2, 0),
           time: hours + ":" + new Date().getMinutes().toLocaleString().padStart(2, 0) + period
         };
@@ -179,6 +180,20 @@ const Home = () => {
               New Transcation
             </h3>
             <div className="mt-8 flex flex-col gap-4 items-start">
+                {
+                  categories.length >= 1 &&
+                  <div className='w-full'>
+                <h3 className='text-zinc-400 font-semibold mb-2'>Select Category</h3>
+                <select value={selectedCate} onChange={(e) => setSelectedCate(e.target.value)} className='w-full border outline-none px-4 capitalize py-2 rounded-md border-zinc-300 focus:border-blue-300'>
+                  {
+                    categories.reverse().map((item, index) => (
+                      <option value={item.title} key={index}>{item.title}</option>
+                    ))
+                  }
+                </select>
+              </div>
+                }
+              
               <input
                 type="text"
                 placeholder="Transcation Name"
