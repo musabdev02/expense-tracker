@@ -5,6 +5,7 @@ import { FaShoppingBag, FaDog, FaCheese, FaDollarSign, FaFolder, FaGlassMartiniA
 // components
 import Button from "../components/UI/Button";
 import Category from "../components/Categories/Category";
+import Alert from "../components/UI/Alert";
 // ICONS
 const Categories = () => {
   // avalaible icons
@@ -16,6 +17,12 @@ const Categories = () => {
   const [newCate, setNewCate] = useState(false);
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const categories = JSON.parse(localStorage.getItem("categories")) || [];
+  // alert
+  const [alertContent, setAlertContent] = useState({
+    title: "",
+    color: "red",
+    isVisible: false
+  });
 
   // functions
   const newCateRq = () => {
@@ -36,7 +43,11 @@ const Categories = () => {
   
       savedCategories.push(newOne);
       localStorage.setItem("categories", JSON.stringify(savedCategories));
-      
+      setAlertContent({
+        title: "New Category Created!",
+        color: "green",
+        isVisible: true
+      })
       resetProps();
       setNewCate(false);
     }
@@ -50,11 +61,11 @@ const Categories = () => {
     {
       newCate &&
       <div className="absolute flex justify-center items-center w-full h-screen bg-zinc-800/50 left-0 top-0 z-9">
-        <div className="w-[30%] relative h-[auto] bg-white  my-4 rounded-lg px-8 py-16">
+        <div className="w-[90%] sm:w-[30%] relative h-[auto] bg-white  my-4 rounded-lg px-8 py-16">
           <span onClick={abortCateRq} className="absolute right-5 top-5 cursor-pointer">
             <IoMdClose size={22} />
           </span>
-          <h3 className="font-semibold text-3xl text-zinc-600">New Category</h3>
+          <h3 className="font-semibold text-2xl sm:text-3xl text-zinc-600">New Category</h3>
           <div className="mt-8 flex flex-col gap-4 items-start">
             <input
               type="text"
@@ -88,23 +99,23 @@ const Categories = () => {
     }
     {/* category main content */}
       <div>
-        <div className="flex items-center justify-between">
-          <h3 className="font-semibold text-3xl text-blue-900">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 sm:items-center justify-between">
+          <h3 className="font-semibold text-xl sm:text-3xl text-blue-900">
             All Categories
           </h3>
           <span onClick={newCateRq}>
           <Button content={"Add New Category"} isIcon={true} />
           </span>
         </div>
-        <div className="mt-12 flex justify-between text-zinc-600 px-6">
-          <div>Category Name</div>
-          <div className="flex items-center justify-between w-4/12">
-            <div>Created On</div>
-            <div>Actions</div>
+        <div className="mt-12 flex justify-between text-zinc-600 sm:px-6">
+          <div className="text-sm sm:text-md">Category Name</div>
+          <div className="flex items-center justify-between w-6/12 sm:w-4/12">
+            <div className="text-sm sm:text-md">Created On</div>
+            <div className="text-sm sm:text-md">Actions</div>
           </div>
         </div>
         {/* categories */}
-        <div className="mt-12 flex flex-col gap-4 h-[70vh] overflow-y-auto hiddenScrollbar">
+        <div className="mt-6 sm:mt-12 flex flex-col gap-4 sm:h-[70vh] overflow-y-auto hiddenScrollbar">
           {
             categories.length >= 1 ? 
             categories.reverse().map((item, index) => (
@@ -114,6 +125,7 @@ const Categories = () => {
           }
         </div>
       </div>
+      <Alert content={alertContent.title} color={alertContent.color} isVisible={alertContent.isVisible}/>
     </>
   );
 };

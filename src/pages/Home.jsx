@@ -111,7 +111,7 @@ const Home = () => {
           description: transDesc,
           icon: selectedIcon,
           date: new Date().getDate() + "/" + (new Date().getMonth()+1 ).toLocaleString().padStart(2, 0),
-          time: hours + ":" + new Date().getMinutes().toLocaleString().padStart(2, 0) + period
+          time: hours + ":" + new Date().getMinutes().toLocaleString().padStart(2, 0) + " " + period
         };
         savedTranscations.push(newOne);
         localStorage.setItem("transcations", JSON.stringify(savedTranscations));
@@ -176,7 +176,7 @@ const Home = () => {
             >
               <IoMdClose size={22} />
             </span>
-            <h3 className="font-semibold text-3xl text-zinc-600">
+            <h3 className="font-semibold text-2xl sm:text-3xl text-zinc-600">
               New Transcation
             </h3>
             <div className="mt-8 flex flex-col gap-4 items-start">
@@ -258,7 +258,7 @@ const Home = () => {
           <TransactionsContainer newTransRq={newTransRq}/>
           </div>
           {/* info & news */}
-          <div className="w-[100%] sm:w-[30%] py-8 sm:px-14">
+          <div className="hidden sm:block w-[100%] sm:w-[30%] py-8 sm:px-14">
             <h4 className="mb-6 text-lg text-zinc-500">News & Information</h4>
             {/* add balance card! */}
             {

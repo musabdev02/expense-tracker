@@ -8,7 +8,7 @@ const Button = ({content , isIcon, theme}) => {
     addTheme = "border-blue-300 hover:bg-blue-100 text-blue-800"
   }
   return (
-    <button className={`flex items-center gap-2 border ${addTheme} cursor-pointer py-2 rounded-md px-4 `}>
+    <button className={`flex items-center gap-2 border ${addTheme} cursor-pointer py-1 sm:py-2 rounded-md sm:px-4 px-2 text-sm sm:text-md `}>
         {
             isIcon && <CiCirclePlus size={20} />  
         }
