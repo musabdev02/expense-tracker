@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, Suspense, lazy} from 'react'
 // ICONS
 import { IoMdClose } from 'react-icons/io'
 // components
@@ -9,6 +9,8 @@ import SinglePoup from '../components/Home/SinglePoup'
 import Alert from '../components/UI/Alert'
 // helper
 import { closeAlert } from '../helper'
+// Chart
+const SmallChart = lazy(() => import("../charts/SmallChart"))
 
 const Home = () => {
   // userName
@@ -22,6 +24,7 @@ const Home = () => {
   const [expense, setExpense] = useState(0);
   // transcations
   const categories = JSON.parse(localStorage.getItem("categories")) || [];
+  const transactions = JSON.parse(localStorage.getItem("transcations")) || [];
   const [transcations, setTranscations] = useState([]);
   const [transName, setTransName] = useState("");
   const [transAmount, setTransAmount] = useState(0);
@@ -256,16 +259,18 @@ const Home = () => {
           <TransactionsContainer newTransRq={newTransRq}/>
           </div>
           {/* info & news */}
-          <div className="hidden sm:block w-[100%] sm:w-[30%] py-8 sm:px-14">
+          <div className="w-[100%] sm:w-[30%] py-8 sm:px-14">
             <h4 className="mb-6 text-lg text-zinc-500">News & Information</h4>
             {/* add balance card! */}
             {
-              hasBalance === true ? "Nothing here.." : 
-              <div className="w-[300px] h-52 bg-yellow-200 rounded-md p-8">
-                <h3 className="font-[500] text-xl text-yellow-900 leading-7">Add a Balance to Get Started Your Finanical Journey.</h3>
-                <p className="mt-8 font-semibold cursor-pointer text-yellow-800 hover:underline" onClick={newBalanceRq}>Add Balance</p>
-              </div>
+              hasBalance !== true && <div className="w-[300px] h-52 bg-yellow-200 rounded-md p-8">
+              <h3 className="font-[500] text-xl text-yellow-900 leading-7">Add a Balance to Get Started Your Finanical Journey.</h3>
+              <p className="mt-8 font-semibold cursor-pointer text-yellow-800 hover:underline" onClick={newBalanceRq}>Add Balance</p>
+            </div>
             }
+            <Suspense fallback={<p>Loading Charts...</p>}>
+              <SmallChart expenses={transactions} />
+            </Suspense>
           </div>
           </section>
         </section>

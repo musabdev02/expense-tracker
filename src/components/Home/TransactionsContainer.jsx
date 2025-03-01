@@ -27,7 +27,7 @@ const Transactions = ({ newTransRq }) => {
         <p className='hidden sm:block'>Time</p>
         <p>Actions</p>
       </div>
-      <div className="hiddenScrollbar mb-20 md:max-h-[330px] overflow-y-auto sm:overflow-y-auto">
+      <div className="hiddenScrollbar mb-4 md:max-h-[330px] overflow-y-auto sm:overflow-y-auto">
         {
           transcations.length >= 1 ?
           transcations.reverse().map((item, index) => (
