@@ -3,6 +3,3 @@ export const closeAlert = (arg) => {
         arg({isVisible: false})
     }, 1500);
 };
-export const fixedtheBody = () => {
-    document.body.style.overflow = "hidden";
-}

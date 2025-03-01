@@ -2,7 +2,7 @@ import React from 'react'
 
 const SinglePoup = ({ title, holder, isNumber, changeFun, changeVal, saveFun}) => {
   return (
-    <div className="w-full h-screen z-9 left-0 top-0 absolute bg-[#020202eb] flex items-center justify-center">
+    <div className="fixed inset-0 flex justify-center items-center w-full h-screen bg-zinc-800/50 z-[99]">
     <div className="sm:w-[20%] w-[90%] h-[200px] bg-white rounded-lg p-8 text-center">
       <h3 className=" text-xl text-zinc-600">
         {title}
