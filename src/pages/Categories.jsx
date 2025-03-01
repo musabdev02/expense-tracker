@@ -54,8 +54,10 @@ const Categories = () => {
     <FaTree />,
     <FaTshirt />,
   ];
-
   // states
+  const [categories, setCategories] = useState(
+    JSON.parse(localStorage.getItem("categories")) || []
+  );
   const [cateName, setCateName] = useState("");
   const [selectedIcon, setSelectedIcon] = useState("");
   const [newCate, setNewCate] = useState(false);
@@ -73,9 +75,6 @@ const Categories = () => {
     "Nov",
     "Dec",
   ];
-
-  
-  const categories = JSON.parse(localStorage.getItem("categories")) || [];
   // alert
   const [alertContent, setAlertContent] = useState({
     title: "",
@@ -101,6 +100,7 @@ const Categories = () => {
       };
       savedCategories.push(newOne);
       localStorage.setItem("categories", JSON.stringify(savedCategories));
+      setCategories(savedCategories)
       setAlertContent({
         title: "New Category Created!",
         color: "green",
@@ -115,9 +115,9 @@ const Categories = () => {
     setCateName("");
   };
   const deleteCategory = (i) => {
-    let savedCategories = JSON.parse(localStorage.getItem("categories"));
-    let updatedCategories = savedCategories.filter((_, index) => index !== i);
+    let updatedCategories = categories.filter((_, index) => index !== i);
     localStorage.setItem("categories", JSON.stringify(updatedCategories));
+    setCategories(updatedCategories);
   };
   return (
     <>
@@ -185,7 +185,7 @@ const Categories = () => {
         {/* categories */}
         <div className="mt-6 sm:mt-12 flex flex-col gap-4 sm:h-[70vh] overflow-y-auto hiddenScrollbar">
           {categories.length >= 1 ? (
-            categories
+            [...categories]
               .reverse()
               .map((item, index) => (
                 <Category
