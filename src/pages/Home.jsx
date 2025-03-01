@@ -7,6 +7,8 @@ import Card from '../components/Home/Card'
 import TransactionsContainer from '../components/Home/TransactionsContainer'
 import SinglePoup from '../components/Home/SinglePoup'
 import Alert from '../components/UI/Alert'
+// helper
+import { closeAlert } from '../helper'
 
 const Home = () => {
   // userName
@@ -123,7 +125,7 @@ const Home = () => {
           isVisible: true
         });
         setNewTrans(false);
-        closeAlert();
+        closeAlert(setAlertContent)
         calculateRemain()
       };
     }else{
@@ -141,11 +143,7 @@ const Home = () => {
     setTransAmount("");
     setTransDesc("");
   };
-  const closeAlert = () => {
-    setTimeout(() => {
-      setAlertContent({isVisible: false})
-    }, 1500);
-  };
+  
   const calculateRemain = () => {
     let oldBalance = JSON.parse(localStorage.getItem("balance"));
     localStorage.setItem("balance", JSON.stringify({

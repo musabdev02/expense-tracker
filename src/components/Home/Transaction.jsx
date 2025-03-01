@@ -2,7 +2,7 @@ import React from 'react'
 // ICONS
 import * as Icons from "react-icons/fa";
 import Button from '../UI/Button';
-const Transaction = ({ title, amount, date, time, icon }) => {
+const Transaction = ({ title, amount, date, time, icon, i, openDetails }) => {
   const IconComponent = Icons[icon] || Icons.FaQuestionCircle
   return (
     <div className='mt-6 flex items-center justify-between'>
@@ -23,7 +23,9 @@ const Transaction = ({ title, amount, date, time, icon }) => {
         <h3>{time}</h3>
       </div>
       {/* actions */}
+      <span onClick={() => openDetails(i)}>
       <Button content={"Details"} isIcon={false} />
+      </span>
     </div>
   )
 }
