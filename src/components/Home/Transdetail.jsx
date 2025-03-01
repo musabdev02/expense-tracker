@@ -1,7 +1,9 @@
 import React from 'react'
 // components
 import Button from '../UI/Button'
+import { fixedtheBody } from '../../helper'
 const Transdetail = ({ details, closeDetails }) => {
+  fixedtheBody();
   return (
     <div className="absolute flex justify-center items-center w-full h-[100vh] bg-zinc-800/50 left-0 top-0 z-99">
           <div className="w-[90%] sm:w-[25%] relative h-[auto] bg-white  my-4 rounded-lg px-8 py-16">
