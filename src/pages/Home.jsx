@@ -229,7 +229,7 @@ const Home = () => {
       }
       
       {/* homePage */}
-        <section>
+        <section className='relative'>
           <div className="flex items-start sm:items-center gap-4 sm:gap-0 justify-between flex-col sm:flex-row">
             <div>
               <h3 className="font-semibold text-2xl sm:text-4xl text-blue-900">
@@ -262,13 +262,13 @@ const Home = () => {
           <TransactionsContainer newTransRq={newTransRq}/>
           </div>
           {/* info & news */}
-          <div className="hidden sm:block w-[100%] sm:w-[30%] py-8 sm:px-14">
+          <div className="w-[100%] mb-4 sm:w-[30%] py-8 sm:px-14">
             <h4 className="mb-6 text-lg text-zinc-500">Analytics & News</h4>
             {/* add balance card! */}
             {
-              hasBalance !== true && <div className="w-[300px] h-52 bg-yellow-200 rounded-md p-8">
-              <h3 className="font-[500] text-xl text-yellow-900 leading-7">Add a Balance to Get Started Your Finanical Journey.</h3>
-              <p className="mt-8 font-semibold cursor-pointer text-yellow-800 hover:underline" onClick={newBalanceRq}>Add Balance</p>
+              hasBalance !== true && <div className="absolute sm:static sm:top-0 top-0 sm:w-[300px] sm:h-52 bg-yellow-200 rounded-md p-4 sm:p-8">
+              <h3 className="font-[500] sm:text-xl text-yellow-900 leading-7">Add a Balance to Get Started Your Finanical Journey.</h3>
+              <p className="mt-4 sm:mt-8 font-semibold cursor-pointer text-yellow-800 hover:underline" onClick={newBalanceRq}>Add Balance</p>
             </div>
             }
             <Suspense fallback={<p>Loading Chart...</p>}>

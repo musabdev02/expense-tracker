@@ -28,7 +28,7 @@ const Transactions = ({ newTransRq }) => {
         <p className='hidden sm:block'>Time</p>
         <p>Actions</p>
       </div>
-      <div className="hiddenScrollbar mb-20 md:max-h-[330px] overflow-y-auto sm:overflow-y-auto">
+      <div className="hiddenScrollbar mb-2 md:max-h-[330px] overflow-y-auto sm:overflow-y-auto">
         {
           recentTransactions.length >= 1 ?
           recentTransactions.map((item, index) => (
