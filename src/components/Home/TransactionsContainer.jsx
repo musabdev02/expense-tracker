@@ -4,14 +4,15 @@ import Transaction from './Transaction'
 import Button from '../UI/Button'
 import Transdetail from './Transdetail'
 const Transactions = ({ newTransRq }) => {
-  let transcations = JSON.parse(localStorage.getItem("transcations")) || [];
+  let transactions = JSON.parse(localStorage.getItem("transcations")) || [];
   const [rqDetails, setRqDetails] = useState(false);
   const [details, setDetails] = useState({});
   // funcs
   const openDetails = (index) => {
     setRqDetails(true)
-    setDetails(transcations[index]);
+    setDetails(transactions[index]);
   };
+  const recentTransactions = transactions.slice(-4).reverse();
   const closeDetails = () => {setRqDetails(false)}
   return (
     <>
@@ -27,12 +28,13 @@ const Transactions = ({ newTransRq }) => {
         <p className='hidden sm:block'>Time</p>
         <p>Actions</p>
       </div>
-      <div className="hiddenScrollbar mb-4 md:max-h-[330px] overflow-y-auto sm:overflow-y-auto">
+      <div className="hiddenScrollbar mb-20 md:max-h-[330px] overflow-y-auto sm:overflow-y-auto">
         {
-          transcations.length >= 1 ?
-          transcations.reverse().map((item, index) => (
+          recentTransactions.length >= 1 ?
+          recentTransactions.map((item, index) => (
             <Transaction title={item.title} amount={item.amount} key={index} i={index} date={item.date} time={item.time} icon={item.icon} openDetails={openDetails} closeDetails={closeDetails}/> 
           )):
+          
           <div className='h-full flex items-center justify-center flex-col gap-4'>
             <h4 className='text-md sm:text-lg text-zinc-600'>There is no transcations yet..</h4>
            <span onClick={newTransRq}><Button content={"Add Transcation"} /></span> 

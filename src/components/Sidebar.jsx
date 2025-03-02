@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 // ICONS
 import { MdOutlineCategory } from "react-icons/md";
@@ -20,13 +20,13 @@ const Sidebar = () => {
                 <span className="text-2xl sm:text-md"><IoHomeOutline /></span>
                 <p className="text-lg hidden sm:block">Home</p>
             </Link>
+            <Link to={"/transactions"}className={`cursor-pointer flex-col sm:flex-row flex items-center hover:bg-blue-100 gap-4 p-3 rounded-lg ${location.pathname === "/transactions" ? "bg-blue-300 hover:bg-blue-300" : ""}`}>
+                <span className="text-2xl sm:text-md"><FaRegChartBar /></span>
+                <p className="text-lg hidden sm:block">Transactions</p>
+            </Link>
             <Link to={"/categories"} className={`cursor-pointer flex-col sm:flex-row flex items-center hover:bg-blue-100 gap-4 p-3 rounded-lg ${location.pathname === "/categories" ? "bg-blue-300 hover:bg-blue-300" : ""}`}>
                 <span className="text-2xl sm:text-md"><MdOutlineCategory /></span>
                 <p className="text-lg hidden sm:block">Categories</p>
-            </Link>
-            <Link to={"/statistics"}className={`cursor-pointer flex-col sm:flex-row flex items-center hover:bg-blue-100 gap-4 p-3 rounded-lg ${location.pathname === "/statistics" ? "bg-blue-300 hover:bg-blue-300" : ""}`}>
-                <span className="text-2xl sm:text-md"><FaRegChartBar /></span>
-                <p className="text-lg hidden sm:block">Statistics</p>
             </Link>
             <Link to={"/settings"} className={` cursor-pointer flex flex-col sm:flex-row items-center hover:bg-blue-100 gap-4 p-3 rounded-lg ${location.pathname === "/settings" ? "bg-blue-300 hover:bg-blue-300" : ""}`}>
                 <span className="text-2xl sm:text-md"><IoSettingsOutline /></span>

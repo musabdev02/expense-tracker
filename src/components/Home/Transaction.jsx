@@ -19,7 +19,7 @@ const Transaction = ({ title, amount, date, time, icon, i, openDetails }) => {
         <h3>{date}</h3>
       </div>
       {/* time */}
-      <div className='hidden sm:block'>
+      <div className='hidden sm:block leading-1'>
         <h3>{time}</h3>
       </div>
       {/* actions */}

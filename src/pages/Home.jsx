@@ -7,8 +7,6 @@ import Card from '../components/Home/Card'
 import TransactionsContainer from '../components/Home/TransactionsContainer'
 import SinglePoup from '../components/Home/SinglePoup'
 import Alert from '../components/UI/Alert'
-// helper
-import { closeAlert } from '../helper'
 // Chart
 const SmallChart = lazy(() => import("../charts/SmallChart"))
 
@@ -146,7 +144,11 @@ const Home = () => {
     setTransAmount("");
     setTransDesc("");
   };
-  
+  const closeAlert = () => {
+    setTimeout(() => {
+      setAlertContent({isVisible: false})
+    }, 1500);
+};
   const calculateRemain = () => {
     let oldBalance = JSON.parse(localStorage.getItem("balance"));
     localStorage.setItem("balance", JSON.stringify({
@@ -249,6 +251,7 @@ const Home = () => {
               content={"Total balance"}
               addClass={"card1"}
               balance={balance}
+              newBalanceRq={newBalanceRq}
             />
             <Card
               content={"Total Expenses"}
@@ -259,8 +262,8 @@ const Home = () => {
           <TransactionsContainer newTransRq={newTransRq}/>
           </div>
           {/* info & news */}
-          <div className="w-[100%] sm:w-[30%] py-8 sm:px-14">
-            <h4 className="mb-6 text-lg text-zinc-500">News & Information</h4>
+          <div className="hidden sm:block w-[100%] sm:w-[30%] py-8 sm:px-14">
+            <h4 className="mb-6 text-lg text-zinc-500">Analytics & News</h4>
             {/* add balance card! */}
             {
               hasBalance !== true && <div className="w-[300px] h-52 bg-yellow-200 rounded-md p-8">
@@ -268,7 +271,7 @@ const Home = () => {
               <p className="mt-8 font-semibold cursor-pointer text-yellow-800 hover:underline" onClick={newBalanceRq}>Add Balance</p>
             </div>
             }
-            <Suspense fallback={<p>Loading Charts...</p>}>
+            <Suspense fallback={<p>Loading Chart...</p>}>
               <SmallChart expenses={transactions} />
             </Suspense>
           </div>
